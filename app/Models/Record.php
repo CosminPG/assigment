@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+// @TODO: move value field in another table in order to increase sum calculation execution times
 class Record extends Model
 {
     public $timestamps = false;

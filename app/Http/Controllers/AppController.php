@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
-use App\Services\SumarizeService;
+use App\Services\SummarizeService;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class AppController
 {
-    public function app(Request $request)
+    public function app(Request $request): Response|ResponseFactory
     {
         // store record
         Record::create(
@@ -19,7 +20,7 @@ class AppController
         //prepare response
         $response = [
             'request' => $request->all(),
-            'summarized' => SumarizeService::getSumarizedByDestinationId($request->input('destinationId'))
+            'summarized' => SummarizeService::getSummarizedByDestinationId($request->input('destinationId'))
         ];
 
         return response($response, 201);

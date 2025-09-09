@@ -4,13 +4,14 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 
-class SumarizeService
+
+class SummarizeService
 {
     /**
      * @param string $destinationId
      * @return array
      */
-    public static function getSumarizedByDestinationId(string $destinationId): array
+    public static function getSummarizedByDestinationId(string $destinationId): array
     {
         return DB::table('records')
             ->select([DB::raw('SUM(value) as total'), 'unit'])

@@ -9,8 +9,7 @@ use Illuminate\Translation\PotentiallyTranslatedString;
 class RequestRule
 {
     /**
-     * Run the validation rule.
-     *
+     * @return array
      */
     public static function rules(): array
     {

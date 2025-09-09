@@ -8,6 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * // @TODO: move value field in another table in order to increase sum calculation execution times
      */
     public function up(): void
     {

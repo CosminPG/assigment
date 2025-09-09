@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Support\Facades\Log;
+use SplSubject;
 
 class NotificationObserver implements \SplObserver
 {
@@ -18,12 +19,19 @@ class NotificationObserver implements \SplObserver
         $this->request = $request;
     }
 
-    public function update(\SplSubject $subject): void
+    /**
+     *
+     *
+     * @param SplSubject $subject
+     * @return void
+     */
+    public function update(SplSubject $subject): void
     {
         $message = $this->request['recordId'].' has the value: '.$this->request['value'];
-        if ($this->request['value'] > self::AMOUNT_THRESHOLD) {
 
+        if ($this->request['value'] > self::AMOUNT_THRESHOLD) {
             Log::alert($message);
+
             return;
         }
 

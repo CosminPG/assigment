@@ -2,43 +2,48 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
+use SplObjectStorage;
+use SplObserver;
 
 class NotificationSubject implements \SplSubject
 {
-    public $state;
 
     /**
-     * @var \SplObjectStorage List of subscribers. In real life, the list of
-     * subscribers can be stored more comprehensively (categorized by event
-     * type, etc.).
+     * @var SplObjectStorage
      */
-    private \SplObjectStorage $observers;
+    private SplObjectStorage $observers;
 
     public function __construct()
     {
-        $this->observers = new \SplObjectStorage();
+        $this->observers = new SplObjectStorage();
     }
 
     /**
      * The subscription management methods.
+     *
+     * @param SplObserver $observer
+     * @return void
      */
-    public function attach(\SplObserver $observer): void
+    public function attach(SplObserver $observer): void
     {
         $this->observers->attach($observer);
     }
 
-    public function detach(\SplObserver $observer): void
+    /**
+     * Detach subscriber
+     *
+     * @param SplObserver $observer
+     * @return void
+     */
+    public function detach(SplObserver $observer): void
     {
         $this->observers->detach($observer);
     }
 
     /**
      * Trigger an update in each subscriber.
+     *
+     * @return void
      */
     public function notify(): void
     {
