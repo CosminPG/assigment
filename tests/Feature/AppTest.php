@@ -25,10 +25,12 @@ class AppTest extends TestCase
             'unit' => $unit,
             'reference' => $reference
         ];
+        $postData = array_filter($postData);
+
         $response = $this->post('/', $postData);
-        dd($response);
-//
-//        $response->assertStatus(200);
+        dd($response->getContent());
+
+        $response->assertStatus(201);
     }
 
     public static function successRequestDataProvider(): array
@@ -50,7 +52,8 @@ class AppTest extends TestCase
 
         return [
             //recordId, sourceId, destinationId, type, value, unit, reference
-            [Str::uuid()->toString(), Str::uuid()->toString(), $randomsUuids[array_rand($randomsUuids)], $types[array_rand($types)], rand(0, 9999)/100, $units[array_rand($units)], Str::uuid()->toString()]
+            [Str::uuid()->toString(), Str::uuid()->toString(), $randomsUuids[array_rand($randomsUuids)], $types[array_rand($types)], rand(0, 9999)/100, $units[array_rand($units)], Str::uuid()->toString()],
+            [Str::uuid()->toString(), Str::uuid()->toString(), $randomsUuids[array_rand($randomsUuids)], null, rand(0, 9999)/100, $units[array_rand($units)], Str::uuid()->toString()]
         ];
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('time')->nullable();
             $table->string('sourceId');
             $table->string('destinationId')->index();
-            $table->enum('type', ['positive', 'negative'])->nullable();
+            $table->enum('type', ['positive', 'negative'])->nullable(); // this can also be stored as bool
             $table->decimal('value', 10, 4);
             $table->string('unit');
             $table->string('reference');

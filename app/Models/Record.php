@@ -14,7 +14,7 @@ class Record extends Model
         'time',
         'sourceId',
         'destinationId',
-        'type',
+        'type',         // this can also be stored as bool
         'value',
         'unit',
         'reference',
